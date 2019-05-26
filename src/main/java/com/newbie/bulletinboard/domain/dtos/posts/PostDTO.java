@@ -14,7 +14,7 @@ public class PostDTO {
     @GeneratedValue
     private Long postId;
 
-    @Column(name = "POST_CONTENT")
+    @Column(name = "POST_CONTENT", columnDefinition = "text")
     private String postContent;
 
     @Column(name = "CREATE_DT")
