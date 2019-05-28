@@ -1,3 +1,1 @@
-## bulletin-board
-- SpringBoot
-- JPA
+# bulletin-board
