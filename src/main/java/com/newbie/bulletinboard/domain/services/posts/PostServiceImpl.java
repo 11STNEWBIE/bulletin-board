@@ -1,13 +1,11 @@
 package com.newbie.bulletinboard.domain.services.posts;
 
-import com.newbie.bulletinboard.domain.repositories.posts.PostMapper;
-import com.newbie.bulletinboard.domain.repositories.posts.PostRepository;
-import lombok.RequiredArgsConstructor;
+import com.newbie.bulletinboard.domain.repositories.posts.PostDAO;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
 @Service
-public class PostServiceImpl {
-    private final PostRepository postRepository;
-    private final PostMapper postMapper;
+@AllArgsConstructor
+public class PostServiceImpl implements PostService {
+    private final PostDAO postDAO;
 }
