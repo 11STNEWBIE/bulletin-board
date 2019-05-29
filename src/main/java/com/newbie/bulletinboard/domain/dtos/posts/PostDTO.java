@@ -1,5 +1,6 @@
 package com.newbie.bulletinboard.domain.dtos.posts;
 
+import com.newbie.bulletinboard.domain.dtos.members.MemberDTO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,10 +22,10 @@ public class PostDTO {
     @Temporal(TemporalType.DATE)
     private Date createDate;
 
-    @Column(name = "CREATE_ID")
+    @Column(name = "CREATE_SEQ")
     private Long createId;
 
-    @Column(name = "UPDATE_ID")
+    @Column(name = "UPDATE_SEQ")
     private Long updateId;
 
     @Temporal(TemporalType.DATE)

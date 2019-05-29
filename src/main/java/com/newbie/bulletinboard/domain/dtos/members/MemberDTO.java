@@ -1,9 +1,12 @@
 package com.newbie.bulletinboard.domain.dtos.members;
 
+import com.newbie.bulletinboard.domain.dtos.posts.PostDTO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "MEMBER_INFO")
@@ -31,5 +34,11 @@ public class MemberDTO {
 
     @Column(name = "UPDATE_DT")
     private Date updateDate;
+
+    @OneToMany(mappedBy = "createId")
+    private List<PostDTO> createdPosts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "updateId")
+    private List<PostDTO> updatePosts = new ArrayList<>();
 
 }
