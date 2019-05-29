@@ -31,6 +31,7 @@ public class PostDAOImpl implements PostDAO{
         Optional<PostDTO> byId = postRepository.findById(postDTO.getPostId());
         byId.orElseThrow(() -> new PostNotFoundException(postDTO.getPostId()));
         postDTO.setUpdateDate(new Date());
+        postDTO.setUpdateId(postDTO.getUpdateId());
         return postRepository.save(postDTO);
     }
 }
