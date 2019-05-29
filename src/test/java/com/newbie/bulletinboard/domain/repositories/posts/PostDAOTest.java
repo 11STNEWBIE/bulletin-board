@@ -11,12 +11,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ActiveProfiles("test")
 public class PostDAOTest {
 
     @Autowired
@@ -25,7 +27,8 @@ public class PostDAOTest {
     @Autowired
     MemberDAO memberDAO;
 
-    PostDTO savedPostDTO;
+    private PostDTO savedPostDTO;
+    private MemberDTO savedMemberDTO;
 
     @Before
     public void setup() {
@@ -33,13 +36,13 @@ public class PostDAOTest {
         memberDTO.setMemId("juwon");
         memberDTO.setMemName("juwon");
         try {
-            memberDTO = memberDAO.insertMember(memberDTO);
-        } catch (MemberIdDuplicateMemberIdException e) {
+            savedMemberDTO = memberDAO.insertMember(memberDTO);
+        } catch (MemberIdDuplicateMemberIdException ignored) {
         }
 
         PostDTO postDTO = new PostDTO();
         postDTO.setPostContent("tests");
-        postDTO.setCreateId(memberDTO.getMemSeq());
+        postDTO.setCreateId(savedMemberDTO.getMemSeq());
         savedPostDTO = postDAO.insertPost(postDTO);
     }
 
@@ -50,7 +53,7 @@ public class PostDAOTest {
         try {
             postDTO = postDAO.getPostInformation(postDTO);
             System.out.println(postDTO);
-        } catch (PostNotFoundException e) {
+        } catch (PostNotFoundException ignored) {
         }
         assertNotNull(savedPostDTO.getCreateId());
         assertNotNull(savedPostDTO.getCreateDate());
@@ -60,6 +63,7 @@ public class PostDAOTest {
     @Test
     public void updatePost() throws PostNotFoundException {
         savedPostDTO.setPostContent("TESTSSSSSSS");
+        savedPostDTO.setUpdateId(savedMemberDTO.getMemSeq());
         PostDTO postDTO = postDAO.updatePost(savedPostDTO);
         assertEquals(postDTO.getPostContent(), "TESTSSSSSSS");
         assertEquals(postDTO.getPostId(), savedPostDTO.getPostId());

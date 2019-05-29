@@ -9,11 +9,3 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql : true
-        jdbc:
-          lob:
-            non_contextual_creation: true
-    database: h2
