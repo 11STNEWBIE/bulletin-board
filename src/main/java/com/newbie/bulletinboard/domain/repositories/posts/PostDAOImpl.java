@@ -1,37 +1,45 @@
 package com.newbie.bulletinboard.domain.repositories.posts;
 
-import com.newbie.bulletinboard.domain.dtos.posts.PostDTO;
 import com.newbie.bulletinboard.domain.exceptions.PostNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
-public class PostDAOImpl implements PostDAO{
+public class PostDAOImpl implements PostDAO {
     private final PostRepository postRepository;
     private final PostMapper postMapper;
 
     @Override
-    public PostDTO getPostInformation(PostDTO postDTO) throws PostNotFoundException {
-        Optional<PostDTO> byId = postRepository.findById(postDTO.getPostId());
-        return byId.orElseThrow(() -> new PostNotFoundException(postDTO.getPostId()));
+    public PostVO getPostInformation(PostVO postVO) throws PostNotFoundException {
+        Optional<PostVO> byId = postRepository.findById(postVO.getPostId());
+
+        return byId.orElseThrow(() -> new PostNotFoundException(postVO.getPostId()));
     }
 
     @Override
-    public PostDTO insertPost(PostDTO postDTO) {
-        postDTO.setCreateDate(new Date());
-        return postRepository.save(postDTO);
+    public PostVO insertPost(PostVO postVO) {
+        postVO.setCreateDate(new Date());
+
+        return postRepository.save(postVO);
     }
 
     @Override
-    public PostDTO updatePost(PostDTO postDTO) throws PostNotFoundException {
-        Optional<PostDTO> byId = postRepository.findById(postDTO.getPostId());
-        byId.orElseThrow(() -> new PostNotFoundException(postDTO.getPostId()));
-        postDTO.setUpdateDate(new Date());
-        postDTO.setUpdateId(postDTO.getUpdateId());
-        return postRepository.save(postDTO);
+    public PostVO updatePost(PostVO postVO) throws PostNotFoundException {
+        postMapper.updateContents(postVO);
+
+        return postRepository.findById(postVO.getPostId()).orElseGet(PostVO::new);
+    }
+
+    @Override
+    public List<PostVO> getPostList(int page, int size) {
+        Page<PostVO> all = postRepository.findAll(PageRequest.of(page, size));
+        return all.getContent();
     }
 }
