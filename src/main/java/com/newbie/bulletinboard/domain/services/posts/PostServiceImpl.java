@@ -26,7 +26,9 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO getPost(PostDTO postDTO) throws PostNotFoundException {
-        PostVO postInformation = postDAO.getPostInformation(modelMapper.map(postDTO, PostVO.class));
+        PostVO postInformation = postDAO.getPostInformation(modelMapper.map(postDTO, PostVO.class))
+                .orElseThrow(() -> new PostNotFoundException(postDTO.getPostId()));
+
         return modelMapper.map(postInformation, PostDTO.class);
     }
 
@@ -34,7 +36,7 @@ public class PostServiceImpl implements PostService {
     public PostDTO updatePostContent(PostDTO postDTO) throws PostNotFoundException {
         PostVO map = modelMapper.map(postDTO, PostVO.class);
 
-        PostVO postInformation = postDAO.getPostInformation(map);
+        PostVO postInformation = postDAO.getPostInformation(map).orElseThrow(() -> new PostNotFoundException(postDTO.getPostId()));
 
         postInformation.setUpdateDate(new Date());
         postInformation.setUpdateId(map.getUpdateId());
