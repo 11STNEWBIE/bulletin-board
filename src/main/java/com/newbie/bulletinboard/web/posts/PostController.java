@@ -13,26 +13,27 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.List;
 
-@Controller("/posts")
+@Controller
+@RequestMapping("/posts")
 @AllArgsConstructor
 public class PostController {
     private final PostService postService;
     private final MemberService memberService;
 
-    @PutMapping("/insert")
+    @RequestMapping("/insert")
     public @ResponseBody
     PostDTO insertPosts(@ModelAttribute("posts") PostDTO postDTO) {
         return postService.insertPost(postDTO);
     }
 
-    @GetMapping("/lists/all")
+    @RequestMapping("/lists/all")
     public @ResponseBody
     List<PostDTO> getAllPosts(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
                               @RequestParam(value = "size", required = false, defaultValue = "10") @Min(1) @Max(20) int size) {
         return postService.getPostList(page, size);
     }
 
-    @GetMapping("/posts/{postId}/information")
+    @RequestMapping("/posts/{postId}/information")
     public @ResponseBody
     PostDTO getPosts(@PathVariable("postId") Long postId) throws PostNotFoundException {
         var postDTO = new PostDTO();
@@ -41,8 +42,8 @@ public class PostController {
     }
 
     @RequestMapping("/views/lists")
-    public String listView(@RequestParam("page") int page,
-                           @RequestParam("size") int pageSize,
+    public String listView(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                           @RequestParam(value = "size", required = false, defaultValue = "10") int pageSize,
                            Model model) {
         model.addAttribute("posts", postService.getPostList(page, pageSize));
         return "views";

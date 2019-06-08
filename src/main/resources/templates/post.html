@@ -8,19 +8,23 @@
         $(document).ready(function() {
             $('#submits').on("click", function() {
             });
+
+            $('#returns').on('click', function() {
+
+            });
         });
     </script>
 </head>
 <body>
     <dl>
         <dt>PostID</dt>
-        <dd th:text="${post.getPostId()}"></dd>
+        <dd id="postId" th:text="${post.getPostId()}"></dd>
 
         <dt>CreateDate</dt>
-        <dd th:text="${post.getCreateDate()}"></dd>
+        <dd id="createDate" th:text="${post.getCreateDate()}"></dd>
 
         <dt>Content</dt>
-        <dd th:text="${post.getPostContent()}"></dd>
+        <dd id="postContent" th:text="${post.getPostContent()}"></dd>
     </dl>
     <button id="submits">수정</button>
     <button id="returns">리스트로</button>

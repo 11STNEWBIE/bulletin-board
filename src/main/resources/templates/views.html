@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="/webjars/jquery/3.4.1/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+           $('#inserts').on('click', function() {
+               location.href = "/views/insert";
+           })
+        });
+    </script>
 </head>
 <body>
     <table>
@@ -20,5 +27,6 @@
             <a href="/views/update?postId=" + th:text="${post.getPostId()}">수정</a>
         </tr>
     </table>
+    <button id="inserts">글쓰기</button>
 </body>
 </html>

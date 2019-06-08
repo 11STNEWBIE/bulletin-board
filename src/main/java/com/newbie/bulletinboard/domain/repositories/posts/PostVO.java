@@ -1,6 +1,5 @@
 package com.newbie.bulletinboard.domain.repositories.posts;
 
-import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
