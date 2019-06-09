@@ -26,6 +26,8 @@ public class PostsService {
     @Transactional
     public void update(Long id, PostsSaveRequestDto dto) {
         Posts posts = postsRepository.getOne(id);
+        if (posts == null) return;
+
         posts.setTitle(dto.getTitle());
         posts.setContent(dto.getContent());
         posts.setWriter(dto.getWriter());
