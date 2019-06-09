@@ -3,6 +3,7 @@ package board.bulletin.toy.domain.posts;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 public class Posts {
 
