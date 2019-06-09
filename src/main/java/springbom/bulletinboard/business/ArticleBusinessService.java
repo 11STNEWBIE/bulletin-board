@@ -17,4 +17,9 @@ public class ArticleBusinessService {
         // 이곳에 비즈니스 로직을 추가할 수 있다
         return repository.findAll();
     }
+
+    public Article addArticle(Article article) {
+        return repository.saveAndFlush(article);
+    }
+
 }

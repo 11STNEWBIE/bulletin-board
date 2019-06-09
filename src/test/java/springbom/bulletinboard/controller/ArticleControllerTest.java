@@ -2,6 +2,7 @@ package springbom.bulletinboard.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.Any;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -17,6 +18,7 @@ import springbom.bulletinboard.model.Article;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,7 +34,7 @@ public class ArticleControllerTest {
     private ArticleBusinessService businessService;
 
     @Test
-    public void home() throws Exception {
+    public void homeTest() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders
                 .get("/")
                 .accept(MediaType.APPLICATION_JSON);
@@ -43,15 +45,17 @@ public class ArticleControllerTest {
     }
 
     @Test
-    public void retrieveAllArticles_basic() throws Exception {
-        Article articleFirst = new Article("THIS IS TITLE","Hello, world");
-        articleFirst.setId(1);
+    public void retrieveAllArticlesTest_basic() throws Exception {
+        Article expectedFirst = new Article("THIS IS TITLE","Hello, world");
+        expectedFirst.setId(1);
 
-        Article articleSecond = new Article("Rainy day", "rain rain...");
-        articleSecond.setId(2);
+        Article expectedSecond = new Article("Rainy day", "rain rain...");
+        expectedSecond.setId(2);
+
+        String expectedJson = "[" + fomattingToJson(expectedFirst) + "," + fomattingToJson(expectedSecond) + "]";
 
         when(businessService.retrieveAllArticles()).thenReturn(
-                Arrays.asList(articleFirst, articleSecond)
+                Arrays.asList(expectedFirst, expectedSecond)
         );
 
         RequestBuilder request = MockMvcRequestBuilders
@@ -60,9 +64,37 @@ public class ArticleControllerTest {
 
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().json("" +
-                        "[{\"id\":1,\"title\":\"THIS IS TITLE\",\"contents\":\"Hello, world\",\"value\":0}," +
-                        "{\"id\":2,\"title\":\"Rainy day\",\"contents\":\"rain rain...\",\"value\":0}]"))
+                .andExpect(content().json(expectedJson))
                 .andReturn();
     }
+
+    @Test
+    public void addTest_basic() throws Exception {
+        Article expected = new Article("test-title", "test-contents");
+        expected.setId(0);
+        String expectedJson = fomattingToJson(expected);
+
+        when(businessService.addArticle(any(Article.class))).thenReturn(expected);
+
+        RequestBuilder request = MockMvcRequestBuilders
+                .post("/add")
+                .param("id", "0")
+                .param("title", "test-title")
+                .param("contents", "test-contents");
+
+
+        MvcResult result = mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().json(expectedJson))
+                .andReturn();
+    }
+
+    private String fomattingToJson(Article article) {
+        return String.format("" +
+                "{\"id\":%d,\"title\":\"%s\",\"contents\":\"%s\",\"value\":%d}",
+                article.getId(), article.getTitle(), article.getContents(), article.getValue()
+        );
+
+    }
+
 }
