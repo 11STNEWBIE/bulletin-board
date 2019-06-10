@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/webjars/jquery/3.4.1/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+           $('#inserts').on('click', function() {
+               location.href = "/views/insert";
+           })
+        });
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>SEQ</td>
+            <td>POSTCONTENT</td>
+            <td>CREATE DATE</td>
+            <td>수정</td>
+        </tr>
+        <tr th:each="post : ${posts}">
+            <a href="/views/post?postId=" + th:text="${post.getPostId()}"><td th:text="${post.getPostId()}"></td></a>
+            <td th:text="${post.getPostContent()}"></td>
+            <td th:text="${post.getCreateDate()}"></td>
+            <a href="/views/update?postId=" + th:text="${post.getPostId()}">수정</a>
+        </tr>
+    </table>
+    <button id="inserts">글쓰기</button>
+</body>
+</html>

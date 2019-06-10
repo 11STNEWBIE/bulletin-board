@@ -56,11 +56,8 @@ public class PostDAOTest {
     public void getPostInformation() {
         PostVO postDTO = new PostVO();
         postDTO.setPostId(savedPostDTO.getPostId());
-        try {
-            postDTO = postDAO.getPostInformation(postDTO);
-            System.out.println(postDTO);
-        } catch (PostNotFoundException ignored) {
-        }
+        postDTO = postDAO.getPostInformation(postDTO).orElseGet(PostVO::new);
+        System.out.println(postDTO);
         assertNotNull(savedPostDTO.getCreateId());
         assertNotNull(savedPostDTO.getCreateDate());
         assertNotNull(savedPostDTO.getPostContent());
@@ -73,7 +70,7 @@ public class PostDAOTest {
         PostVO updateCount = postDAO.updatePost(savedPostDTO);
         assertNotNull(updateCount);
 
-        PostVO postInformation = postDAO.getPostInformation(savedPostDTO);
+        PostVO postInformation = postDAO.getPostInformation(savedPostDTO).orElseGet(PostVO::new);
 
         assertEquals(postInformation.getPostId(), savedPostDTO.getPostId());
         assertEquals(postInformation.getPostContent(), savedPostDTO.getPostContent());

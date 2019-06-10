@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
-import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
@@ -22,11 +21,9 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public MemberVO insertMember(MemberVO memberVO) throws MemberIdDuplicateMemberIdException {
-        Optional<MemberVO> byMemId = memberRepository.findByMemId(memberVO.getMemId());
+        var byMemId = memberRepository.findByMemId(memberVO.getMemId());
 
-        if (byMemId.isPresent()) {
-            throw new MemberIdDuplicateMemberIdException(memberVO.getMemId());
-        }
+        if (byMemId.isPresent()) throw new MemberIdDuplicateMemberIdException(memberVO.getMemId());
 
         memberVO.setCreateDate(new Date());
 
@@ -35,7 +32,7 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public MemberVO updateMember(MemberVO memberVO) throws MemberNotFoundException {
-        Optional<MemberVO> byMemId = memberRepository.findByMemId(memberVO.getMemId());
+        var byMemId = memberRepository.findByMemId(memberVO.getMemId());
 
         byMemId.orElseThrow(() -> new MemberNotFoundException(memberVO.getMemId()));
         memberVO.setUpdateDate(new Date());
@@ -45,9 +42,9 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public int memberNameUpdate(MemberVO memberVO) throws MemberNotFoundException {
-        Optional<MemberVO> byMemId = memberRepository.findByMemId(memberVO.getMemId());
+        var byMemId = memberRepository.findByMemId(memberVO.getMemId());
 
-        MemberVO savedMember = byMemId.orElseThrow(() -> new MemberNotFoundException(memberVO.getMemId()));
+        var savedMember = byMemId.orElseThrow(() -> new MemberNotFoundException(memberVO.getMemId()));
         memberVO.setMemSeq(savedMember.getMemSeq());
         memberVO.setUpdateDate(new Date());
 
@@ -56,9 +53,9 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public int memberStatusUpdate(MemberVO memberVO) throws MemberNotFoundException {
-        Optional<MemberVO> byMemId = memberRepository.findByMemId(memberVO.getMemId());
+        var byMemId = memberRepository.findByMemId(memberVO.getMemId());
 
-        MemberVO savedMember = byMemId.orElseThrow(() -> new MemberNotFoundException(memberVO.getMemId()));
+        var savedMember = byMemId.orElseThrow(() -> new MemberNotFoundException(memberVO.getMemId()));
         memberVO.setMemSeq(savedMember.getMemSeq());
         memberVO.setUpdateDate(new Date());
 

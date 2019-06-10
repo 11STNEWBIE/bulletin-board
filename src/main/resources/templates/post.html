@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/webjars/jquery/3.4.1/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#submits').on("click", function() {
+            });
+
+            $('#returns').on('click', function() {
+
+            });
+        });
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>PostID</dt>
+        <dd id="postId" th:text="${post.getPostId()}"></dd>
+
+        <dt>CreateDate</dt>
+        <dd id="createDate" th:text="${post.getCreateDate()}"></dd>
+
+        <dt>Content</dt>
+        <dd id="postContent" th:text="${post.getPostContent()}"></dd>
+    </dl>
+    <button id="submits">수정</button>
+    <button id="returns">리스트로</button>
+</body>
+</html>

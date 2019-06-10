@@ -17,10 +17,8 @@ public class PostDAOImpl implements PostDAO {
     private final PostMapper postMapper;
 
     @Override
-    public PostVO getPostInformation(PostVO postVO) throws PostNotFoundException {
-        Optional<PostVO> byId = postRepository.findById(postVO.getPostId());
-
-        return byId.orElseThrow(() -> new PostNotFoundException(postVO.getPostId()));
+    public Optional<PostVO> getPostInformation(PostVO postVO) {
+        return postRepository.findById(postVO.getPostId());
     }
 
     @Override

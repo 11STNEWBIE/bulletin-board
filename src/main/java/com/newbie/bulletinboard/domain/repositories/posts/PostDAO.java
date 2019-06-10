@@ -3,9 +3,10 @@ package com.newbie.bulletinboard.domain.repositories.posts;
 import com.newbie.bulletinboard.domain.exceptions.PostNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PostDAO {
-    PostVO getPostInformation(PostVO postDTO) throws PostNotFoundException;
+    Optional<PostVO> getPostInformation(PostVO postDTO);
 
     PostVO insertPost(PostVO postDTO);
 
