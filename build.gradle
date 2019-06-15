@@ -15,11 +15,21 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    api 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0'
+    implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.h2database:h2'
     implementation 'org.springframework.boot:spring-boot-devtools'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude module: 'junit'
+    }
+    
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.3.2')
+    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.3.2')
+    testCompile('org.junit.jupiter:junit-jupiter-params:5.3.2')
+
+//    test {
+//        useJUnitPlatform() 
+//    }
 }

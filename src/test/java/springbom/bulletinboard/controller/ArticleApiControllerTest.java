@@ -1,12 +1,12 @@
 package springbom.bulletinboard.controller;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -16,13 +16,13 @@ import springbom.bulletinboard.model.Article;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @WebMvcTest(ArticleApiController.class)
 public class ArticleApiControllerTest {
 
@@ -33,7 +33,7 @@ public class ArticleApiControllerTest {
     private ArticleBusinessService businessService;
 
     @Test
-    public void homeTest() throws Exception {
+    public void 홈페이지() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders
                 .get("/")
                 .accept(MediaType.APPLICATION_JSON);
@@ -44,7 +44,7 @@ public class ArticleApiControllerTest {
     }
 
     @Test
-    public void retrieveAllArticlesTest_basic() throws Exception {
+    public void 모든게시글읽기_기본() throws Exception {
         Article expectedFirst = new Article("THIS IS TITLE","Hello, world");
         expectedFirst.setId(1);
 
@@ -68,7 +68,7 @@ public class ArticleApiControllerTest {
     }
 
     @Test
-    public void addTest_basic() throws Exception {
+    public void 게시글추가_기본() throws Exception {
         Article expected = new Article("test-title", "test-contents");
         expected.setId(0);
         String expectedJson = fomattingToJson(expected);
