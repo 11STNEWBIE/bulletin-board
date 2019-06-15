@@ -2,7 +2,6 @@ package springbom.bulletinboard.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.internal.matchers.Any;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -24,8 +23,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(ArticleController.class)
-public class ArticleControllerTest {
+@WebMvcTest(ArticleApiController.class)
+public class ArticleApiControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
