@@ -21,7 +21,10 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     implementation 'org.springframework.boot:spring-boot-devtools'
 
-    implementation 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    testCompileOnly 'org.projectlombok:lombok:1.18.8'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.8'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude module: 'junit'
@@ -31,7 +34,7 @@ dependencies {
     testRuntime('org.junit.jupiter:junit-jupiter-engine:5.3.2')
     testCompile('org.junit.jupiter:junit-jupiter-params:5.3.2')
 
-//    test {
-//        useJUnitPlatform() 
-//    }
+    test {
+        useJUnitPlatform() 
+    }
 }

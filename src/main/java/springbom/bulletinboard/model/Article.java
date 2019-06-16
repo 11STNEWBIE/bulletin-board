@@ -1,5 +1,6 @@
 package springbom.bulletinboard.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,50 +39,11 @@ public class Article {
     protected Article() {
     }
 
+    @Builder
     public Article(String title, String contents) {
         this.title = title;
         this.contents = contents;
     }
-
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
-//
-//    public LocalDateTime getCreateDate() {
-//        return createDate;
-//    }
-//
-//    public void setCreateDate(LocalDateTime createDate) {
-//        this.createDate = createDate;
-//    }
-//
-//    public String getTitle() {
-//        return title;
-//    }
-//
-//    public void setTitle(String title) {
-//        this.title = title;
-//    }
-//
-//    public String getContents() {
-//        return contents;
-//    }
-//
-//    public void setContents(String contents) {
-//        this.contents = contents;
-//    }
-//
-//    public int getValue() {
-//        return value;
-//    }
-//
-//    public void setValue(int value) {
-//        this.value = value;
-//    }
 
     @Override
     public String toString() {
