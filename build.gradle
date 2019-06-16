@@ -30,4 +30,11 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	runtime 'org.postgresql:postgresql'
+	compile 'org.springframework.boot:spring-boot-starter-jdbc'
+	compile 'org.mybatis:mybatis-spring'
+	compile 'org.mybatis:mybatis'
+	compile 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+	compile 'org.modelmapper:modelmapper:2.3.4'
+	compile 'org.apache.commons:commons-lang3:3.9'
+	compile 'org.webjars.bower:jquery:3.4.1'
 }

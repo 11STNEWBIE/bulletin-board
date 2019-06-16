@@ -1,0 +1,13 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newbie.bulletinboard.domain.repositories.posts.PostMapper">
+
+    <update id="updateContents" parameterType="com.newbie.bulletinboard.domain.repositories.posts.PostVO">
+        UPDATE POST
+        SET POST_CONTENT = #{postContent},
+            UPDATE_SEQ = #{updateId},
+            UPDATE_DT = #{updateDate}
+        WHERE POST_ID = #{postId}
+    </update>
+</mapper>
