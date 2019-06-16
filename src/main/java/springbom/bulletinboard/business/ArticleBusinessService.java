@@ -3,6 +3,7 @@ package springbom.bulletinboard.business;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import springbom.bulletinboard.data.ArticleRepository;
+import springbom.bulletinboard.dto.ArticleSaveRequestDto;
 import springbom.bulletinboard.model.Article;
 
 import java.util.List;
@@ -24,6 +25,11 @@ public class ArticleBusinessService {
     @Transactional
     public Article addArticle(Article article) {
         return repository.saveAndFlush(article);
+    }
+
+    @Transactional
+    public Long addByDto(ArticleSaveRequestDto dto) {
+        return repository.save(dto.toEntity()).getId();
     }
 
 }
