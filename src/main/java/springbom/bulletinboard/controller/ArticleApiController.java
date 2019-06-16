@@ -1,7 +1,6 @@
 package springbom.bulletinboard.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/article")
 public class ArticleApiController {
 
-    private ArticleBusinessService businessService;
+    private final ArticleBusinessService businessService;
 
     public ArticleApiController(ArticleBusinessService businessService) {
         this.businessService = businessService;
@@ -29,7 +28,7 @@ public class ArticleApiController {
 
     @PostMapping("/add")
     public Long add(@RequestBody ArticleSaveRequestDto dto) {
-        return businessService.addByDto(dto);
+        return businessService.addArticle(dto);
     }
 
 }

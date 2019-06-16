@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>게시판</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div class="card">
+
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>{{ article.title }}</strong>
+    </h5>
+
+    <div class="card-body px-lg-5 pt-0">
+        <form class="text-center" style="color: #757575;">
+
+            <div class="md-form mt-3">
+                {{ article.contents }}
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -7,11 +7,12 @@ import springbom.bulletinboard.dto.ArticleSaveRequestDto;
 import springbom.bulletinboard.model.Article;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ArticleBusinessService {
 
-    private ArticleRepository repository;
+    private final ArticleRepository repository;
 
     public ArticleBusinessService(ArticleRepository repository) {
         this.repository = repository;
@@ -22,13 +23,12 @@ public class ArticleBusinessService {
         return repository.findAll();
     }
 
-    @Transactional
-    public Article addArticle(Article article) {
-        return repository.saveAndFlush(article);
+    public Optional<Article> findArticle(long id) {
+        return repository.findById(id);
     }
 
     @Transactional
-    public Long addByDto(ArticleSaveRequestDto dto) {
+    public Long addArticle(ArticleSaveRequestDto dto) {
         return repository.save(dto.toEntity()).getId();
     }
 
