@@ -52,4 +52,14 @@ public class PostServiceImpl implements PostService {
                 .map(postVO -> modelMapper.map(postVO, PostDTO.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public PostDTO deletePosts(PostDTO postDTO) throws PostNotFoundException {
+        var postVO = modelMapper.map(postDTO, PostVO.class);
+        postVO = postDAO.getPostInformation(postVO)
+                .orElseThrow(() -> new PostNotFoundException(postDTO.getPostId()));
+
+        postDAO.deletePost(postVO);
+        return modelMapper.map(postVO, PostDTO.class);
+    }
 }

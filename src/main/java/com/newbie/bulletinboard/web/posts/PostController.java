@@ -20,25 +20,33 @@ public class PostController {
     private final PostService postService;
     private final MemberService memberService;
 
-    @RequestMapping("/insert")
+    @RequestMapping(value = "/insert", method = RequestMethod.PUT)
     public @ResponseBody
     PostDTO insertPosts(@ModelAttribute("posts") PostDTO postDTO) {
         return postService.insertPost(postDTO);
     }
 
-    @RequestMapping("/lists/all")
+    @RequestMapping(value = "/lists/all", method = RequestMethod.GET)
     public @ResponseBody
     List<PostDTO> getAllPosts(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
                               @RequestParam(value = "size", required = false, defaultValue = "10") @Min(1) @Max(20) int size) {
         return postService.getPostList(page, size);
     }
 
-    @RequestMapping("/posts/{postId}/information")
+    @RequestMapping(value = "/posts/{postId}/information", method = RequestMethod.GET)
     public @ResponseBody
     PostDTO getPosts(@PathVariable("postId") Long postId) throws PostNotFoundException {
         var postDTO = new PostDTO();
         postDTO.setPostId(postId);
         return postService.getPost(postDTO);
+    }
+
+    @RequestMapping(value = "/posts/delete/{postId}", method = RequestMethod.DELETE)
+    public @ResponseBody
+    PostDTO deletePosts(@PathVariable("postId") Long postId) throws PostNotFoundException {
+        var postDTO = new PostDTO();
+        postDTO.setPostId(postId);
+        return postService.deletePosts(postDTO);
     }
 
     @RequestMapping("/views/lists")
