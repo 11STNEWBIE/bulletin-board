@@ -1,6 +1,7 @@
 package springbom.bulletinboard.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,13 @@ public class ArticleApiController {
     @PostMapping("/add")
     public Long add(@RequestBody ArticleSaveRequestDto dto) {
         return businessService.addArticle(dto);
+    }
+
+    @PostMapping("/update/{id}")
+    public void update(@PathVariable("id") Long id,
+            @RequestBody ArticleSaveRequestDto dto) {
+
+        businessService.updateArticle(id, dto);
     }
 
 }

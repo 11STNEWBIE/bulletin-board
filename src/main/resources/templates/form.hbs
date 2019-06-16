@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>글쓰기</title>
+    <title>{{pageTitle}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -11,7 +11,7 @@
     <div class="card">
 
         <h5 class="card-header info-color white-text text-center py-4">
-            <strong>글쓰기</strong>
+            <strong>{{pageTitle}}</strong>
         </h5>
 
         <!--Card content-->
@@ -22,12 +22,14 @@
 
                 <div class="md-form mt-3">
                     <label for="form-title">제목</label>
-                    <input type="text" id="form-title" class="form-control" placeholder="제목을 쓰세요">
+                    <input type="text" id="form-title" class="form-control"
+                           placeholder="제목을 쓰세요" value="{{article.title}}">
                 </div>
 
                 <div class="md-form">
                     <label for="form-contents">내용</label>
-                    <textarea id="form-contents" class="form-control md-textarea" rows="3" placeholder="내용을 쓰세요"></textarea>
+                    <textarea id="form-contents" class="form-control md-textarea" rows="3"
+                              placeholder="내용을 쓰세요">{{article.contents}}</textarea>
                 </div>
 
                 <!-- Send button -->
@@ -42,7 +44,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
-        function postArticle(){
+        function addArticle(){
             var data = {
                 title: $('#form-title').val(),
                 contents: $('#form-contents').val()
@@ -63,10 +65,8 @@
         }
 
         $(document).ready(function(){
-
             $('#btn-save').click(function(){
-                console.log("눌렀다!!");
-                postArticle();
+                addArticle();
             });
         })
 

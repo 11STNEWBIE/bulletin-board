@@ -32,4 +32,12 @@ public class ArticleBusinessService {
         return repository.save(dto.toEntity()).getId();
     }
 
+    @Transactional
+    public void updateArticle(Long id, ArticleSaveRequestDto dto) {
+        Article articleToUpdate = repository.findById(id).get();
+        articleToUpdate.setTitle(dto.getTitle());
+        articleToUpdate.setContents(dto.getContents());
+
+        repository.save(articleToUpdate);
+    }
 }
