@@ -1,8 +1,6 @@
 package com.newbie.bulletinboard.domain.repositories.posts;
 
-import com.newbie.bulletinboard.domain.exceptions.PostNotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
@@ -29,7 +27,7 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
-    public PostVO updatePost(PostVO postVO) throws PostNotFoundException {
+    public PostVO updatePost(PostVO postVO) {
         postMapper.updateContents(postVO);
 
         return postRepository.findById(postVO.getPostId()).orElseGet(PostVO::new);
@@ -37,7 +35,13 @@ public class PostDAOImpl implements PostDAO {
 
     @Override
     public List<PostVO> getPostList(int page, int size) {
-        Page<PostVO> all = postRepository.findAll(PageRequest.of(page, size));
+        var all = postRepository.findAll(PageRequest.of(page, size));
         return all.getContent();
+    }
+
+    @Override
+    public PostVO deletePost(PostVO postVO) {
+        postRepository.deleteById(postVO.getPostId());
+        return null;
     }
 }

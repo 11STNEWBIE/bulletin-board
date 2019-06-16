@@ -13,4 +13,6 @@ public interface PostDAO {
     PostVO updatePost(PostVO postDTO) throws PostNotFoundException;
 
     List<PostVO> getPostList(int page, int size);
+
+    PostVO deletePost(PostVO postVO);
 }
