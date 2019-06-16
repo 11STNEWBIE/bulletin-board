@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springbom.bulletinboard.business.ArticleBusinessService;
 import springbom.bulletinboard.dto.ArticleSaveRequestDto;
@@ -12,6 +13,7 @@ import springbom.bulletinboard.model.Article;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/article")
 public class ArticleApiController {
 
     private ArticleBusinessService businessService;
@@ -20,22 +22,12 @@ public class ArticleApiController {
         this.businessService = businessService;
     }
 
-    @GetMapping("/")
-    public String home() {
-        return "This is home";
-    }
-
-    @GetMapping("/articles")
+    @GetMapping("/all")
     public List<Article> retrieveAllArticles() {
         return businessService.retrieveAllArticles();
     }
 
     @PostMapping("/add")
-    public Article addArticle(@ModelAttribute("article") Article article) {
-        return businessService.addArticle(article);
-    }
-
-    @PostMapping("/addByDto")
     public Long add(@RequestBody ArticleSaveRequestDto dto) {
         return businessService.addByDto(dto);
     }

@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ArticleController {
 
-    @GetMapping("/main")
-    public String main() {
-        return "main";
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
+
+    @GetMapping("/article/form")
+    public String createArticle() {
+        return "form";
     }
 }
