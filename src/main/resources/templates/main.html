@@ -2,9 +2,66 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>게시판(예정)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <title>게시판</title>
 </head>
 <body>
+    <div>
 
+    </div>
+    <div class="columns">
+        <div class="column is-3">
+            <div class="field">
+                <label class="label">Title</label>
+                <div class="control">
+                    <input class="input" type="text" id="title" placeholder="제목을 적어주세요" />
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Content</label>
+                <div class="control">
+                    <input class="input" type="text" id="content" placeholder="내용을 적어주세요" />
+                </div>
+            </div>
+            <div class="field">
+                <button class="button is-link" onclick="save()">Submit</button>
+            </div>
+        </div>
+        <div class="column is-9">
+            <table class="table is-striped is-fullwidth">
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th>작성자</th>
+                </tr>
+                <tr th:each="post : ${posts}">
+                    <th th:text="${post.id}">0</th>
+                    <th th:text="${post.title}">0</th>
+                    <th th:text="${post.content}">0</th>
+                    <th th:text="${post.writer}">0</th>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
+<script>
+    const save = () => {
+        const data = {
+            title: document.querySelector('#title').value,
+            content: document.querySelector('#content').value,
+            writer: 'hello',
+        };
+
+        fetch('/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        }).then(res => res.json());
+    }
+</script>
 </html>
