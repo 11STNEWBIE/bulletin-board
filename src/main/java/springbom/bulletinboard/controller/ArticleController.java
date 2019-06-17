@@ -22,26 +22,17 @@ public class ArticleController {
         return "home";
     }
 
-    // TODO: add not found page, use DTO
     @GetMapping("/article/{id}")
-    public String getArticle(@PathVariable("id") long id,
-                             Model model) {
-        Article article = businessService.findArticle(id).get();
+    public String getArticle(@PathVariable("id") Long id, Model model){
+        Article article = businessService.findArticle(id);
         model.addAttribute("article", article);
 
         return "articleDetail";
     }
 
     @GetMapping("/article/form")
-    public String articleForm(@RequestParam(value = "id", required = false) Long id,
-                              Model model) {
-        if (id == null) {
-            model.addAttribute("pageTitle", "글쓰기");
-        } else {
-            Article article = businessService.findArticle(id).get();
-            model.addAttribute("article", article);
-            model.addAttribute("pageTitle", "수정하기");
-        }
+    public String articleForm(@RequestParam(value = "id", required = false) Long id, Model model) {
+        model.addAllAttributes(businessService.getFormAttribute(id));
 
         return "form";
     }

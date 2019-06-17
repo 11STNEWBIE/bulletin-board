@@ -6,8 +6,9 @@ import springbom.bulletinboard.data.ArticleRepository;
 import springbom.bulletinboard.dto.ArticleSaveRequestDto;
 import springbom.bulletinboard.model.Article;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 @Service
 public class ArticleBusinessService {
@@ -23,8 +24,9 @@ public class ArticleBusinessService {
         return repository.findAll();
     }
 
-    public Optional<Article> findArticle(long id) {
-        return repository.findById(id);
+    // TODO: add not found Exception, use DTO
+    public Article findArticle(long id) {
+        return repository.findById(id).get();
     }
 
     @Transactional
@@ -40,4 +42,19 @@ public class ArticleBusinessService {
 
         repository.save(articleToUpdate);
     }
+
+    public Map<String, Object> getFormAttribute(Long id) {
+        Map<String, Object> attributeMap = new HashMap<>();
+
+        if (id == null) {
+            attributeMap.put("pageTitle", "글쓰기");
+        } else {
+            Article article = findArticle(id);
+            attributeMap.put("article", article);
+            attributeMap.put("pageTitle", "수정하기");
+        }
+
+        return attributeMap;
+    }
+
 }
