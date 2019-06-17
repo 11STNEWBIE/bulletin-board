@@ -33,9 +33,7 @@ public class ArticleApiController {
     }
 
     @PostMapping("/update/{id}")
-    public void update(@PathVariable("id") Long id,
-            @RequestBody ArticleSaveRequestDto dto) {
-
+    public void update(@PathVariable("id") Long id, @RequestBody ArticleSaveRequestDto dto) {
         businessService.updateArticle(id, dto);
     }
 
