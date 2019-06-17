@@ -1,6 +1,6 @@
 package springbom.bulletinboard.business;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import springbom.bulletinboard.data.ArticleRepository;
 import springbom.bulletinboard.dto.ArticleSaveRequestDto;
@@ -9,7 +9,7 @@ import springbom.bulletinboard.model.Article;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class ArticleBusinessService {
 
     private final ArticleRepository repository;
