@@ -27,7 +27,7 @@ public class ArticleApiController {
         return businessService.retrieveAllArticles();
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public Long add(@RequestBody ArticleSaveRequestDto dto) {
         return businessService.addArticle(dto);
     }
