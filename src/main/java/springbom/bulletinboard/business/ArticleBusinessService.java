@@ -34,6 +34,7 @@ public class ArticleBusinessService {
         return repository.save(dto.toEntity()).getId();
     }
 
+    // TODO: Exception, response type
     @Transactional
     public void updateArticle(Long id, ArticleSaveRequestDto dto) {
         Article articleToUpdate = repository.findById(id).get();
@@ -57,4 +58,8 @@ public class ArticleBusinessService {
         return attributeMap;
     }
 
+    // TODO: Exception, response type
+    public void deleteArticle(Long id) {
+        repository.delete(findArticle(id));
+    }
 }
