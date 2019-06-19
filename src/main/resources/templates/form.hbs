@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>{{pageTitle}}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="card">
+
+        <h5 class="card-header info-color white-text text-center py-4">
+            <strong>{{pageTitle}}</strong>
+        </h5>
+
+        <!--Card content-->
+        <div class="card-body px-lg-5 pt-0">
+
+            <!-- Form -->
+            <form class="text-center" style="color: #757575;">
+
+                <div class="md-form mt-3">
+                    <label for="form-title">제목</label>
+                    <input type="text" id="form-title" class="form-control"
+                           placeholder="제목을 쓰세요" value="{{article.title}}">
+                </div>
+
+                <div class="md-form">
+                    <label for="form-contents">내용</label>
+                    <textarea id="form-contents" class="form-control md-textarea" rows="3"
+                              placeholder="내용을 쓰세요">{{article.contents}}</textarea>
+                </div>
+
+                <!-- Send button -->
+                <button id="btn-save" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect">완료</button>
+
+            </form>
+            <!-- Form -->
+
+        </div>
+
+    </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        function addArticle(){
+            var data = {
+                title: $('#form-title').val(),
+                contents: $('#form-contents').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/article',
+                dataType: 'json',
+                contentType:'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function() {
+                    alert('글이 등록되었습니다.');
+                    location.reload();
+            }).fail(function (error) {
+                    alert(error.toString());
+            });
+        }
+
+        $(document).ready(function(){
+            $('#btn-save').click(function(){
+                addArticle();
+            });
+        })
+
+    </script>
+</body>
+</html>

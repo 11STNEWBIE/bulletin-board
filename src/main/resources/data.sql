@@ -1,0 +1,2 @@
+insert into article(id, create_date, title, contents) values (1, SYSDATE, 'THIS IS TITLE', 'Hello, world');
+insert into article(id, create_date, title, contents) values (2, SYSDATE, 'Rainy day', 'rain rain...');
