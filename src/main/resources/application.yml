@@ -5,7 +5,7 @@ spring:
     password: pass
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create  # SessionFactory가 올라갈 때 테이블을 지우고 새로 만듬
     show-sql: true
     properties:
       hibernate:

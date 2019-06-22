@@ -21,13 +21,12 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<PostV1> getPostList() {
         return postRepository.findAll().stream()
-                .map(x -> modelMapper.map(x, PostV1.class))
+                .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void addPost(PostV1 dto) {
-        Post post = modelMapper.map(dto, Post.class);
+    public void addPost(Post post) {
         postRepository.save(post);
     }
 
@@ -38,9 +37,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void updatePost(Long id, PostV1 dto) {
+    public void updatePost(Long id, Post post) {
         getPostById(id);
-        postRepository.save(modelMapper.map(dto, Post.class));
+        postRepository.save(modelMapper.map(post, Post.class));
     }
 
     @Override
@@ -51,5 +50,10 @@ public class PostServiceImpl implements PostService {
 
     private Post getPostById(Long id) throws PostNotFoundException {
         return postRepository.findById(id).orElseThrow(() -> new PostNotFoundException(id));
+    }
+
+    private PostV1 convertToDto(Post post) {
+        PostV1 dto = modelMapper.map(post, PostV1.class);
+        return dto;
     }
 }
