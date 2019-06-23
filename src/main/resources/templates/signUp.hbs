@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>가입</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+<form class="signup-form" action="/member" method="POST">
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="member_name" name="memberName" type="text" class="validate"/>
+            <label for="member_name">Name</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="password" name="password" type="password" class="validate"/>
+            <label for="password">Password</label>
+        </div>
+    </div>
+    <input class="signup-btn waves-effect waves-light btn" type="submit" value="가입하기" />
+</form>
+</body>
+</html>

@@ -33,7 +33,7 @@ public class Member {
     private Date joinDate;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "memberName")
+    @JoinColumn(name = "memberId")
     private List<MemberRole> roles;
 
 }
