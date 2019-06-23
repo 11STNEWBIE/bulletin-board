@@ -28,7 +28,7 @@ public class MemberDAOImpl implements MemberDAO {
 
         memberVO.setCreateDate(new Date());
 
-        return memberRepository.save(memberVO);
+        return memberRepository.saveAndFlush(memberVO);
     }
 
     @Override

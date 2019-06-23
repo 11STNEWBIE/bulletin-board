@@ -42,6 +42,7 @@ public class MemberDAOTest {
         memberVO.setMemName("jjjj");
 
         MemberVO memberVO1 = memberDAO.insertMember(memberVO);
+        System.out.println(memberVO1);
         assertThat(memberVO1).isNotNull();
     }
 
