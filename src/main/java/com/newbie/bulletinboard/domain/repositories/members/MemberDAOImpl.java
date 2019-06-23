@@ -23,7 +23,8 @@ public class MemberDAOImpl implements MemberDAO {
     public MemberVO insertMember(MemberVO memberVO) throws MemberIdDuplicateMemberIdException {
         var byMemId = memberRepository.findByMemId(memberVO.getMemId());
 
-        if (byMemId.isPresent()) throw new MemberIdDuplicateMemberIdException(memberVO.getMemId());
+        if (byMemId.isPresent())
+            throw new MemberIdDuplicateMemberIdException(memberVO.getMemId());
 
         memberVO.setCreateDate(new Date());
 
