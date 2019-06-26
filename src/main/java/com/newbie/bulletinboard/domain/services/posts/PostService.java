@@ -13,4 +13,6 @@ public interface PostService {
     PostDTO updatePostContent(PostDTO postDTO) throws PostNotFoundException, Exception;
 
     List<PostDTO> getPostList(int page, int size);
+
+    PostDTO deletePosts(PostDTO postDTO) throws PostNotFoundException;
 }
