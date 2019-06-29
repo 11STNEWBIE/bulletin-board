@@ -38,4 +38,7 @@ public class MemberVO {
     @Column(name = "UPDATE_DT")
     private Date updateDate;
 
+    @Column(name = "PASSWORD")
+    private String password;
+
 }

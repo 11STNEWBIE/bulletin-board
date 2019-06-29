@@ -43,4 +43,15 @@ public class MemberServiceTest {
         MemberDTO juwon = memberService.getMemberInformation("juwon");
         assertNotNull(juwon);
     }
+
+    @Test
+    public void joinMember() {
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setMemName("sss");
+        memberDTO.setMemId("ssss");
+        MemberDTO memberDTO1 = memberService.joinMember(memberDTO);
+
+        System.out.println(memberDTO1);
+        assertNotNull(memberDTO1);
+    }
 }

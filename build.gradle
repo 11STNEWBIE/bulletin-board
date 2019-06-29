@@ -37,4 +37,6 @@ dependencies {
 	compile 'org.modelmapper:modelmapper:2.3.4'
 	compile 'org.apache.commons:commons-lang3:3.9'
 	compile 'org.webjars.bower:jquery:3.4.1'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testCompile 'org.springframework.security:spring-security-test'
 }

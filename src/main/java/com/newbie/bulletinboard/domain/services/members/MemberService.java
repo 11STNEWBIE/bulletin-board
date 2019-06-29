@@ -7,4 +7,6 @@ public interface MemberService {
 
     MemberDTO getMemberInformation(String memberId) throws MemberNotFoundException;
 
+    MemberDTO joinMember(MemberDTO memberDTO);
+
 }

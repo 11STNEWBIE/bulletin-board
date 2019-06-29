@@ -2,11 +2,12 @@ package com.newbie.bulletinboard.domain.dtos.members;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
 @Data
-public class MemberDTO {
+public class MemberDTO implements Serializable {
 
     private Long memSeq;
 
@@ -19,6 +20,8 @@ public class MemberDTO {
     private MemberStatus memberStatus = MemberStatus.UNAUTHORIZED;
 
     private Date updateDate;
+
+    private String password;
 }
 
 

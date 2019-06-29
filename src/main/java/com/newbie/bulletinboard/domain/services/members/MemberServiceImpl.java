@@ -1,6 +1,7 @@
 package com.newbie.bulletinboard.domain.services.members;
 
 import com.newbie.bulletinboard.domain.dtos.members.MemberDTO;
+import com.newbie.bulletinboard.domain.exceptions.MemberIdDuplicateMemberIdException;
 import com.newbie.bulletinboard.domain.exceptions.MemberNotFoundException;
 import com.newbie.bulletinboard.domain.repositories.members.MemberDAO;
 import com.newbie.bulletinboard.domain.repositories.members.MemberVO;
@@ -22,5 +23,17 @@ public class MemberServiceImpl implements MemberService {
         memberInformation = memberDAO.getMemberInformation(memberInformation);
 
         return modelMapper.map(memberInformation, MemberDTO.class);
+    }
+
+    @Override
+    public MemberDTO joinMember(MemberDTO memberDTO) {
+
+        MemberVO memberVO;
+        try {
+            memberVO = memberDAO.insertMember(modelMapper.map(memberDTO, MemberVO.class));
+        } catch (MemberIdDuplicateMemberIdException e) {
+            return null;
+        }
+        return modelMapper.map(memberVO, MemberDTO.class);
     }
 }
