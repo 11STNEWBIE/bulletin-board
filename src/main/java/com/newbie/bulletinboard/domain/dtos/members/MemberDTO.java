@@ -20,6 +20,8 @@ public class MemberDTO implements Serializable {
     private MemberStatus memberStatus = MemberStatus.UNAUTHORIZED;
 
     private Date updateDate;
+
+    private String password;
 }
 
 
