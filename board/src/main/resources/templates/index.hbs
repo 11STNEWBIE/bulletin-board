@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>혁보드</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<h1>혁보드</h1>
+
+<a href="/posts/form">새 포스트</a>
+
+<table id="posts_table" border="1">
+    <tr>
+        <th>제목</th>
+        <th>내용</th>
+        <th>생성 날짜</th>
+    </tr>
+    {{#each posts}}
+        <tr>
+            <td><a href="/posts/{{id}}">{{title}}</a></td>
+            <td>{{content}}</td>
+            <td>{{createdDate}}</td>
+        </tr>
+    {{/each}}
+</table>
+</body>
+</html>
