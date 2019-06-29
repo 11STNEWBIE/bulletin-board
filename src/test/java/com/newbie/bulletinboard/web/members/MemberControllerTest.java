@@ -6,10 +6,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -30,7 +28,11 @@ public class MemberControllerTest {
         memberDTO.setMemId("aaaaaaaaa");
         memberDTO.setMemName("zzzzzzzzz");
 
-        var request = new HttpEntity<MemberDTO>(memberDTO);
-        testRestTemplate.put("/members/join", request, MemberDTO.class);
+        var httpHeaders = new HttpHeaders();
+        httpHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
+
+        var request = new HttpEntity<>(memberDTO, httpHeaders);
+        var exchange = testRestTemplate.exchange("/members/join", HttpMethod.PUT, request, MemberDTO.class);
+        assertThat(exchange.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }
