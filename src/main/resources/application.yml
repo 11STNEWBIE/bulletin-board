@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bulletinboard
+    username: jinwoo
+    password: pass
+  jpa:
+    hibernate:
+      ddl-auto: create  # SessionFactory가 올라갈 때 테이블을 지우고 새로 만듬
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql : true
+        jdbc:
+          lob:
+            non_contextual_creation: true
